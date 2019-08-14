@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-toolbar>
+    <button mat-button (click)="this.goToMainPage()">
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
+    <span>{{title | titlecase}}</span>
+  </mat-toolbar>
+  <div class="sidebar">
+    <app-sidebar [author]="authors" [publications]="publications"></app-sidebar>
+  </div>
+  <div class="publications-list">
+    <app-publications-view [data]="pubFiltered"></app-publications-view>
+  </div>
+</div>

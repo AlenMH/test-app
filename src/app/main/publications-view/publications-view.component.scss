@@ -1,0 +1,123 @@
+.publications-list {
+  height: calc(100% - 200px);
+  margin: 55px 0;
+  position: fixed;
+  overflow-y: auto;
+}
+
+mat-card {
+  margin: 5px 10px;
+  border-radius: 0;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+
+  & mat-card-header {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0;
+    background: dodgerblue;
+    color: white;
+
+    mat-card-title {
+      font-size: 20px;
+    }
+
+    mat-card-subtitle {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+  }
+
+  .info {
+    font-size: 15px;
+    color: dimgray;
+  }
+
+  & mat-card-content {
+    text-align: justify;
+    font-size: 18px;
+  }
+
+  & mat-card-footer {
+    display: flex;
+    border-top: 1px solid gray;
+    padding-top: 5px;
+    margin: 2px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: space-between;
+
+    & .author {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        color: dodgerblue;
+      }
+    }
+  }
+
+  & .change-view button {
+    background: dodgerblue;
+    color: white;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .7);
+  position: fixed;
+  width: calc(75% - 20px);
+  z-index: 1;
+
+  &.up {
+    box-sizing: border-box;
+    margin: 0 10px;
+    padding: 5px 10px;
+  }
+
+  &.down {
+    margin: 0 10px;
+    bottom: 10px;
+  }
+
+  .sort {
+    display: flex;
+    align-items: center;
+    color: dimgray;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
+  span {
+    color: black;
+  }
+
+  mat-icon {
+    color: dodgerblue;
+  }
+}
+
+.body-publication {
+  mat-card {
+    margin: 10px;
+
+    & mat-card-header {
+      mat-card-title {
+        font-size: 40px;
+      }
+
+      mat-card-subtitle {
+        font-size: 20px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+

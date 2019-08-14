@@ -1,0 +1,91 @@
+<div *ngIf="this._app.displayAll" class="controls up">
+  <span>Publications List</span>
+  <div class="sort">
+    <span>Order type:</span>
+    <mat-icon>{{this.leftIconSort}}</mat-icon>
+    <mat-icon>{{this.rightIconSort}}</mat-icon>
+    <button mat-raised-button (click)="changeSort()">
+      <span>{{this._app.sortOrder}}</span>
+    </button>
+  </div>
+</div>
+<div *ngIf="this._app.displayAll then list else content">
+</div>
+<ng-template #list>
+  <div class="publications-list">
+    <div *ngFor="let publication of publications; index as i">
+      <mat-card *ngIf="i >= this._app.leftVal && i < this._app.rightVal">
+        <mat-card-header>
+          <mat-card-title>{{publication.title | uppercase}}</mat-card-title>
+          <mat-card-subtitle>{{publication.subtitle | titlecase}}</mat-card-subtitle>
+        </mat-card-header>
+        <p class="info">
+          published on: {{publication.date * 1000 | dateFormat: 'LLLL'}}
+          <br><br>
+          by: {{this._app.getAuthor(publication.author) | titlecase}}
+        </p>
+        <mat-card-content>
+          <p>{{publication.description}}...</p>
+        </mat-card-content>
+        <mat-card-footer>
+          <div class="author">
+            <mat-icon>account_circle</mat-icon>
+            {{publication.author}}
+          </div>
+          <div class="change-view">
+            <button mat-raised-button (click)="getCurrentId(publication.id)">view more</button>
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+  <div class="controls down">
+    <button mat-button (click)="firstPage('first')">
+      <mat-icon>first_page</mat-icon>
+      <span>first</span>
+    </button>
+    <button mat-button (click)="prevPage('prev')">
+      <mat-icon>chevron_left</mat-icon>
+      <span>previus</span>
+    </button>
+    <p> [ {{this._app.rightVal}} - {{this._app.pageTotal}} ]</p>
+    <button mat-button (click)="nextPage('next')">
+      <span>next</span>
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button mat-button (click)="lastPage('last')">
+      <span>last</span>
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <div *ngIf="currentPost !== null else getPost(this._app.currentIdPub)">
+    <div class="body-publication">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{currentPost.title | uppercase}}
+          </mat-card-title>
+          <mat-card-subtitle>{{currentPost.subtitle | titlecase}}</mat-card-subtitle>
+        </mat-card-header>
+        <p class="info">
+          published on: {{currentPost.date * 1000 | dateFormat: 'LLLL'}}
+          <br><br>
+          by: {{this._app.getAuthor(currentPost.author) | titlecase}} [ {{currentPost.author}} ]
+        </p>
+        <mat-card-content>
+          <p>{{currentPost.description}}</p>
+          <div *ngFor="let content of currentPost.content">
+            <p *ngIf="content.text">{{content.text}}</p>
+            <img *ngIf="content.img" [src]="this._app.assetsPath+content.img" width="100%">
+          </div>
+        </mat-card-content>
+        <div class="change-view">
+          <button mat-raised-button (click)="changePostsView()">back</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

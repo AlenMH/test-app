@@ -1,0 +1,27 @@
+<mat-accordion>
+  <mat-nav-list class="main">
+    <a mat-list-item (click)="getAllPosts()">
+      <mat-icon>apps</mat-icon>
+      <span class="m-left">All Publications</span>
+    </a>
+  </mat-nav-list>
+  <div *ngFor="let author of authors">
+    <mat-expansion-panel (opened)="getTitles(author.email)">
+      <mat-expansion-panel-header>
+        <mat-icon>account_circle</mat-icon>
+        <span class="m-left">{{author.name | titlecase}} {{author.lastName |titlecase }}</span>
+        <span class="author-email">{{author.email}}</span>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div class="titles">
+          <mat-nav-list *ngFor="let title of author.publications">
+            <div>
+              <a mat-list-item (click)="getPost(title.title)">{{title.title | titlecase}}</a>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-nav-list>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>
